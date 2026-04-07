@@ -297,6 +297,36 @@ iframe {
     font-size: 22px;
 }
 
+.burger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    background: none;
+    border: none;
+    gap: 5px;
+    padding: 10px;
+}
+
+.burger span {
+    width: 30px;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.burger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
 @media (max-width: 768px) {
     body {
         font-size: 18px;
@@ -320,9 +350,21 @@ iframe {
         font-size: 28px;
     }
     
+    .burger {
+        display: flex;
+    }
+    
     .menu {
-        justify-content: center;
-        gap: 12px;
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .menu.show {
+        display: flex;
     }
     
     .menu a {

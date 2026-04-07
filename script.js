@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         setInterval(() => showSlide(currentSlide + 1), 5000);
     }
-    
+
     const calcBtn = document.getElementById('calc-btn');
     
     if(calcBtn) {
@@ -39,6 +39,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 priceSpan.textContent = price;
                 resultDiv.style.display = 'block';
             }
+        });
+    }
+
+    const burger = document.querySelector('.burger');
+    const menu = document.querySelector('.menu');
+    
+    if(burger && menu) {
+        burger.addEventListener('click', function() {
+            burger.classList.toggle('active');
+            menu.classList.toggle('show');
         });
     }
 });

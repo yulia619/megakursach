@@ -40,6 +40,11 @@ if(isset($_POST['register'])) {
                 </div>
             </div>
             <nav>
+                <button class="burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
                 <ul class="menu">
                     <li><a href="index.php">Главная</a></li>
                     <li><a href="services.php">Услуги</a></li>
