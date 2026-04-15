@@ -1,20 +1,29 @@
 <?php
+// Начинаем сессию для авторизации
 session_start();
+// Подключаем базу данных
 require 'configDB.php';
 
+// Обработка отправки формы регистрации
 if(isset($_POST['register'])) {
+    // Получаем данные из формы
     $name = $_POST['name'];
     $email = $_POST['email'];
+    // Хэшируем пароль для безопасного хранения в базе данных
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $phone = $_POST['phone'];
     
+    // SQL-запрос на добавление нового пользователя
     $sql = 'INSERT INTO users(name, email, password, phone) VALUES(?, ?, ?, ?)';
     $query = $pdo->prepare($sql);
     
     try {
+        // Выполняем запрос
         $query->execute([$name, $email, $password, $phone]);
+        // Перенаправляем на страницу входа с сообщением об успехе
         header('Location: login.php?registered=1');
     } catch(PDOException $e) {
+        // Если email уже существует, показываем ошибку
         $error = 'Email уже зарегистрирован';
     }
 }
@@ -28,6 +37,7 @@ if(isset($_POST['register'])) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Шапка сайта -->
     <header class="head">
         <div class="box">
             <div class="head-top">
@@ -40,17 +50,20 @@ if(isset($_POST['register'])) {
                 </div>
             </div>
             <nav>
+                <!-- Кнопка бургер-меню для мобильных -->
                 <button class="burger">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
+                <!-- Главное меню -->
                 <ul class="menu">
                     <li><a href="index.php">Главная</a></li>
                     <li><a href="services.php">Услуги</a></li>
                     <li><a href="calculator.php">Калькулятор</a></li>
                     <li><a href="tracking.php">Отследить груз</a></li>
                     <li><a href="contacts.php">Контакты</a></li>
+                    <!-- Показываем разные пункты меню в зависимости от авторизации -->
                     <?php if(isset($_SESSION['user_id'])): ?>
                         <li><a href="cabinet.php">Кабинет</a></li>
                         <li><a href="logout.php">Выйти</a></li>
@@ -63,9 +76,12 @@ if(isset($_POST['register'])) {
         </div>
     </header>
 
+    <!-- Основной контент -->
     <main>
+        <!-- Хлебные крошки -->
         <div class="box" style="padding: 20px 0;">
             <?php
+            // Выводим навигационную цепочку
             echo '<div style="margin: 10px 0 20px; color: #666;">';
             echo '<a href="index.php" style="color: #3498db; text-decoration: none;">Главная</a>';
             echo ' → <span style="color: #333;">Регистрация</span>';
@@ -77,10 +93,12 @@ if(isset($_POST['register'])) {
             <div class="box">
                 <h2>Регистрация</h2>
                 
+                <!-- Выводим ошибку, если email уже занят -->
                 <?php if(isset($error)): ?>
                     <div style="color: red; margin-bottom: 20px;"><?= $error ?></div>
                 <?php endif; ?>
                 
+                <!-- Форма регистрации -->
                 <form method="POST" class="calc-in" style="max-width: 400px;">
                     <div>
                         <label>Имя</label>
@@ -101,6 +119,7 @@ if(isset($_POST['register'])) {
                     <button type="submit" name="register" class="btn" style="width: 100%;">Зарегистрироваться</button>
                 </form>
                 
+                <!-- Ссылка на страницу входа для уже зарегистрированных пользователей -->
                 <p style="text-align: center; margin-top: 20px;">
                     Уже есть аккаунт? <a href="login.php">Войти</a>
                 </p>
@@ -108,6 +127,7 @@ if(isset($_POST['register'])) {
         </section>
     </main>
 
+    <!-- Подвал сайта -->
     <footer class="foot">
         <div class="box">
             <p>© 2026 ТК "Логист". Все права защищены.</p>

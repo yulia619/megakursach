@@ -1,9 +1,11 @@
+/* ОБНУЛЕНИЕ СТАНДАРТНЫХ СТИЛЕЙ БРАУЗЕРА */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* ОСНОВНЫЕ СТИЛИ ДЛЯ ВСЕГО САЙТА */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.5;
@@ -15,18 +17,21 @@ body {
     background: #fff;
 }
 
+/* КОНТЕЙНЕР ДЛЯ ОГРАНИЧЕНИЯ ШИРИНЫ */
 .box {
     max-width: 1401px;
     margin: 0 auto;
     padding: 0 30px;
 }
 
+/* ШАПКА САЙТА */
 .head {
     background: #2c3e50;
     color: white;
     padding: 35px 0;
 }
 
+/* Верхняя часть шапки: логотип и контакты */
 .head-top {
     display: flex;
     justify-content: space-between;
@@ -35,10 +40,12 @@ body {
     flex-wrap: wrap;
 }
 
+/* Логотип компании */
 .logo img {
     height: 100px;
 }
 
+/* Контактные данные */
 .phone {
     text-align: right;
 }
@@ -53,6 +60,7 @@ body {
     font-size: 38px;
 }
 
+/* НАВИГАЦИОННОЕ МЕНЮ */
 .menu {
     display: flex;
     list-style: none;
@@ -76,6 +84,7 @@ body {
     border-radius: 10px;
 }
 
+/* ГЛАВНЫЙ БАННЕР */
 .main {
     background: #3498db;
     color: white;
@@ -98,6 +107,7 @@ body {
     line-height: 1.4;
 }
 
+/* КНОПКИ */
 .btn {
     display: inline-block;
     background: #e67e22;
@@ -112,6 +122,7 @@ body {
     transition: 0.3s;
 }
 
+/* Альтернативная кнопка (прозрачная с обводкой) */
 .btn2 {
     background: transparent;
     border: 3px solid white;
@@ -127,6 +138,7 @@ body {
     color: #3498db;
 }
 
+/* БЛОК ПРЕИМУЩЕСТВ */
 .sec {
     padding: 100px 0;
     text-align: center;
@@ -139,12 +151,14 @@ body {
     color: #2c3e50;
 }
 
+/* Сетка карточек */
 .row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 50px;
 }
 
+/* Карточка преимущества или услуги */
 .item {
     padding: 45px 35px;
     background: #f9f9f9;
@@ -164,6 +178,7 @@ body {
     line-height: 1.5;
 }
 
+/* ПОДВАЛ САЙТА */
 .foot {
     background: #2c3e50;
     color: white;
@@ -173,11 +188,13 @@ body {
     font-size: 24px;
 }
 
+/* КАЛЬКУЛЯТОР */
 .calc {
     padding: 80px 0;
     background: #f9f9f9;
 }
 
+/* Форма калькулятора */
 .calc-in {
     max-width: 750px;
     margin: 40px auto;
@@ -207,6 +224,7 @@ body {
     font-size: 24px;
 }
 
+/* СЛАЙДЕР */
 .slide-block {
     background: #34495e;
     color: white;
@@ -218,10 +236,12 @@ body {
     min-height: 380px;
 }
 
+/* Отдельный слайд (по умолчанию скрыт) */
 .slide-one {
     display: none;
 }
 
+/* Активный слайд (показывается) */
 .slide-one.active {
     display: block;
 }
@@ -240,6 +260,7 @@ body {
     font-size: 28px;
 }
 
+/* Кнопки переключения слайдера */
 .slide-btn {
     margin-top: 40px;
 }
@@ -256,6 +277,7 @@ body {
     font-weight: bold;
 }
 
+/* ТАБЛИЦЫ */
 .tbl {
     width: 100%;
     border-collapse: collapse;
@@ -276,6 +298,7 @@ body {
     font-size: 22px;
 }
 
+/* КАРТА */
 iframe {
     width: 100%;
     max-width: 100%;
@@ -285,6 +308,7 @@ iframe {
     margin-top: 30px;
 }
 
+/* ХЛЕБНЫЕ КРОШКИ */
 .breadcrumbs {
     margin: 15px 0 25px;
     color: #666;
@@ -297,6 +321,8 @@ iframe {
     font-size: 22px;
 }
 
+/* ГАМБУРГЕР-МЕНЮ */
+/* Кнопка-бургер (скрыта на десктопе) */
 .burger {
     display: none;
     flex-direction: column;
@@ -315,6 +341,7 @@ iframe {
     transition: 0.3s;
 }
 
+/* Анимация при открытом бургере (превращается в крестик) */
 .burger.active span:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
 }
@@ -327,11 +354,13 @@ iframe {
     transform: rotate(-45deg) translate(7px, -7px);
 }
 
+/* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
 @media (max-width: 768px) {
     body {
         font-size: 18px;
     }
     
+    /* Шапка: логотип и контакты друг под другом */
     .head-top {
         flex-direction: column;
         text-align: center;
@@ -350,10 +379,12 @@ iframe {
         font-size: 28px;
     }
     
+    /* Показываем кнопку-бургер */
     .burger {
         display: flex;
     }
     
+    /* Меню скрыто по умолчанию на мобильных */
     .menu {
         display: none;
         width: 100%;
@@ -363,6 +394,7 @@ iframe {
         margin-top: 20px;
     }
     
+    /* При добавлении класса .show меню становится видимым */
     .menu.show {
         display: flex;
     }
@@ -372,6 +404,7 @@ iframe {
         padding: 8px 14px;
     }
     
+    /* Уменьшаем размеры на мобильных */
     .main h2 {
         font-size: 36px;
     }
@@ -410,10 +443,12 @@ iframe {
         padding: 12px 28px;
     }
     
+    /* Карта меньше на мобильных */
     iframe {
         height: 350px;
     }
     
+    /* Таблицы с горизонтальной прокруткой */
     .tbl th, .tbl td {
         font-size: 16px;
         padding: 12px;

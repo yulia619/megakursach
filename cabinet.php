@@ -1,19 +1,26 @@
 <?php
+// Начинаем сессию для авторизации
 session_start();
+// Подключаем базу данных
 require 'configDB.php';
 
+// Проверяем, авторизован ли пользователь
 if(!isset($_SESSION['user_id'])) {
+    // Если не авторизован, отправляем на страницу входа
     header('Location: login.php');
     exit;
 }
 
+// Получаем ID текущего пользователя из сессии
 $user_id = $_SESSION['user_id'];
 
+// Получаем все заявки текущего пользователя из базы данных
 $sql = 'SELECT * FROM requests WHERE user_id = ? ORDER BY created_at DESC';
 $query = $pdo->prepare($sql);
 $query->execute([$user_id]);
 $requests = $query->fetchAll(PDO::FETCH_OBJ);
 
+// Получаем все грузы текущего пользователя из базы данных
 $sql = 'SELECT * FROM cargo WHERE user_id = ? ORDER BY updated_at DESC';
 $query = $pdo->prepare($sql);
 $query->execute([$user_id]);
@@ -28,6 +35,7 @@ $cargos = $query->fetchAll(PDO::FETCH_OBJ);
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Шапка сайта -->
     <header class="head">
         <div class="box">
             <div class="head-top">
@@ -40,11 +48,13 @@ $cargos = $query->fetchAll(PDO::FETCH_OBJ);
                 </div>
             </div>
             <nav>
+                <!-- Кнопка бургер-меню для мобильных -->
                 <button class="burger">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
+                <!-- Главное меню (для авторизованных пользователей) -->
                 <ul class="menu">
                     <li><a href="index.php">Главная</a></li>
                     <li><a href="services.php">Услуги</a></li>
@@ -58,9 +68,12 @@ $cargos = $query->fetchAll(PDO::FETCH_OBJ);
         </div>
     </header>
 
+    <!-- Основной контент -->
     <main>
+        <!-- Хлебные крошки -->
         <div class="box" style="padding: 20px 0;">
             <?php
+            // Выводим навигационную цепочку
             echo '<div style="margin: 10px 0 20px; color: #666;">';
             echo '<a href="index.php" style="color: #3498db; text-decoration: none;">Главная</a>';
             echo ' → <a href="cabinet.php" style="color: #3498db; text-decoration: none;">Личный кабинет</a>';
@@ -70,9 +83,11 @@ $cargos = $query->fetchAll(PDO::FETCH_OBJ);
         </div>
 
         <div class="box" style="padding: 40px 0;">
+            <!-- Приветствие пользователя -->
             <h2>Личный кабинет</h2>
             <p>Здравствуйте, <?= htmlspecialchars($_SESSION['user_name']) ?>!</p>
             
+            <!-- Блок с заявками на перевозку -->
             <h3 style="margin-top: 30px;">Мои заявки на перевозку</h3>
             <?php if($requests): ?>
                 <table class="tbl">
@@ -99,6 +114,7 @@ $cargos = $query->fetchAll(PDO::FETCH_OBJ);
                 <p>У вас пока нет заявок. <a href="calculator.php">Создать заявку</a></p>
             <?php endif; ?>
             
+            <!-- Блок с грузами для отслеживания -->
             <h3 style="margin-top: 30px;">Мои грузы</h3>
             <?php if($cargos): ?>
                 <table class="tbl">
@@ -123,6 +139,7 @@ $cargos = $query->fetchAll(PDO::FETCH_OBJ);
         </div>
     </main>
 
+    <!-- Подвал сайта -->
     <footer class="foot">
         <div class="box">
             <p>© 2026 ТК "Логист". Все права защищены.</p>

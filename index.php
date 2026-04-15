@@ -1,4 +1,5 @@
 <?php
+// Начинаем сессию для авторизации
 session_start();
 ?>
 <!DOCTYPE html>
@@ -7,10 +8,12 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Транспортная компания - грузоперевозки по России</title>
+    <!-- Мета-теги для SEO -->
     <meta name="description" content="Транспортная компания предлагает грузоперевозки по России. Рассчитать стоимость доставки онлайн, отследить груз, оставить заявку">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Шапка сайта -->
     <header class="head">
         <div class="box">
             <div class="head-top">
@@ -23,17 +26,20 @@ session_start();
                 </div>
             </div>
             <nav>
+                <!-- Кнопка бургер-меню для мобильных -->
                 <button class="burger">
                     <span></span>
                     <span></span>
                     <span></span>
                 </button>
+                <!-- Главное меню -->
                 <ul class="menu">
                     <li><a href="index.php">Главная</a></li>
                     <li><a href="services.php">Услуги</a></li>
                     <li><a href="calculator.php">Калькулятор</a></li>
                     <li><a href="tracking.php">Отследить груз</a></li>
                     <li><a href="contacts.php">Контакты</a></li>
+                    <!-- Показываем разные пункты меню в зависимости от авторизации -->
                     <?php if(isset($_SESSION['user_id'])): ?>
                         <li><a href="cabinet.php">Кабинет</a></li>
                         <li><a href="logout.php">Выйти</a></li>
@@ -46,7 +52,9 @@ session_start();
         </div>
     </header>
 
+    <!-- Основной контент -->
     <main>
+        <!-- Главный баннер с фоном -->
         <section class="main" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/bg-main.jpg'); background-size: cover; background-position: center;">
             <div class="box">
                 <h2>Грузоперевозки по России — надежно и быстро</h2>
@@ -58,6 +66,7 @@ session_start();
             </div>
         </section>
 
+        <!-- Слайдер с акциями -->
         <section class="slide-block">
             <div class="box">
                 <div class="slide-box">
@@ -77,6 +86,7 @@ session_start();
                         <p>Под ключ</p>
                     </div>
                 </div>
+                <!-- Кнопки переключения слайдера -->
                 <div class="slide-btn">
                     <button class="prev">←</button>
                     <button class="next">→</button>
@@ -84,6 +94,7 @@ session_start();
             </div>
         </section>
 
+        <!-- Блок преимуществ -->
         <section class="sec">
             <div class="box">
                 <h2>Почему выбирают нас</h2>
@@ -105,6 +116,7 @@ session_start();
         </section>
     </main>
 
+    <!-- Подвал сайта -->
     <footer class="foot">
         <div class="box">
             <p>© 2026 ТК "Логист". Все права защищены.</p>
